@@ -1,0 +1,6 @@
+source 'https://supermarket.chef.io'
+
+cookbook 'apt', '~> 5.0.1'
+cookbook 'git', '~> 5.0.1'
+cookbook 'tmux', '~> 1.5.0'
+cookbook 'vim', '~> 2.0.2'
