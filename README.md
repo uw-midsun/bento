@@ -11,7 +11,7 @@ To build a base box
 
 ```bash
 bundle install
-packer build --only=virtualbox-iso vagrant-base.json
+packer build vagrant-base.json
 ```
 
 ## Provision Scripts
