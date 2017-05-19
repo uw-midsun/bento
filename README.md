@@ -25,4 +25,13 @@ vim Berksfile
 berks vendor cookbooks
 ```
 
+To update vendor cookbooks (ie. regenerating the ``Berksfile.lock`` file)
+
+```bash
+cd chef/
+berks update
+```
+
+Then running the vendor command will fetch the latest versions of the books.
+
 Our own cookbooks are stored in ``chef/uwmidsun-cookbooks/``. Most likely, you'll want to modify the recipes here.
