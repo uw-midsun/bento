@@ -8,11 +8,11 @@ Resource to install OS X applications (.app) from dmg files.
 
 ### Platforms
 
-- Mac OS X
+- macOS
 
 ### Chef
 
-- Chef 12.1+
+- Chef 12.5+
 
 ### Cookbooks
 
@@ -56,8 +56,8 @@ Install `/Applications/Tunnelblick.app` from the primary download site.
 
 ```ruby
 dmg_package 'Tunnelblick' do
-  source   'http://tunnelblick.googlecode.com/files/Tunnelblick_3.1.2.dmg'
-  checksum 'a3fae60b6833175f32df20c90cd3a3603a'
+  source   'https://tunnelblick.net/release/Tunnelblick_3.7.0_build_4790.dmg'
+  checksum '5053038aa8caf7dea66dcab11d6d240672216e6546eff4c2622e216c61af85e5'
   action   :install
 end
 ```
@@ -129,7 +129,7 @@ end
 
 **Author:** Cookbook Engineering Team ([cookbooks@chef.io](mailto:cookbooks@chef.io))
 
-**Copyright:** 2011-2015, Chef Software, Inc.
+**Copyright:** 2011-2017, Chef Software, Inc.
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");
