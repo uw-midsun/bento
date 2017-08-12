@@ -97,7 +97,8 @@
     }, {
       "cookbook_paths": ["chef/cookbooks", "chef/uwmidsun-cookbooks"],
       "run_list": ["git", "tmux", "vim", "stm32-dev"],
-      "type": "chef-solo"
+      "type": "chef-solo",
+      "version": "13.2.20"
     }
   ],
   "variables": {
