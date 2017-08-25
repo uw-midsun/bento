@@ -44,3 +44,5 @@ bash 'install_ruby' do
     rvm install ruby-2.3.3
   EOH
 end
+
+package 'minicom'
