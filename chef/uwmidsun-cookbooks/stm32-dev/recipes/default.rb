@@ -46,3 +46,7 @@ bash 'install_ruby' do
 end
 
 package 'minicom'
+
+# clang
+package 'clang'
+package 'clang-format'
