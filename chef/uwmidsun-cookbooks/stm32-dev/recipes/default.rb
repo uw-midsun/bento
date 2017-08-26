@@ -44,3 +44,23 @@ bash 'install_ruby' do
     rvm install ruby-2.3.3
   EOH
 end
+
+execute 'udevadm-trigger' do
+  action :nothing
+  command '/sbin/udevadm trigger --action=add'
+end
+
+template '/etc/udev/rules.d/99-chef.rules' do
+  source 'udev.rules.erb'
+  owner 'root'
+  group 'root'
+  mode 0o644
+  notifies :run, 'execute[udevadm-trigger]'
+end
+
+template '/etc/minicom/minirc.dfl' do
+  source 'minirc.dfl.erb'
+  owner 'root'
+  group 'root'
+  mode 0o644
+end
