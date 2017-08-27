@@ -1,6 +1,7 @@
 DEPENDENCIES
   apt (~> 6.1.0)
   git (~> 6.0.0)
+  golang (~> 1.7.0)
   tmux (~> 1.5.0)
   vim (~> 2.0.2)
 
@@ -15,6 +16,7 @@ GRAPH
     build-essential (>= 0.0.0)
     dmg (>= 0.0.0)
     yum-epel (>= 0.0.0)
+  golang (1.7.0)
   mingw (2.0.1)
     seven_zip (>= 0.0.0)
   ohai (5.1.0)
