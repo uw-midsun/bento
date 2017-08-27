@@ -66,3 +66,9 @@ ruby_block "insert_line" do
 end
 
 package 'glide'
+
+package 'minicom'
+
+# clang
+package 'clang'
+package 'clang-format'
