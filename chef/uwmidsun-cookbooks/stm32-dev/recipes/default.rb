@@ -64,3 +64,9 @@ template '/etc/minicom/minirc.dfl' do
   group 'root'
   mode 0o644
 end
+
+package 'minicom'
+
+# clang
+package 'clang'
+package 'clang-format'
