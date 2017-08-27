@@ -44,3 +44,9 @@ bash 'install_ruby' do
     rvm install ruby-2.3.3
   EOH
 end
+
+package 'minicom'
+
+# clang
+package 'clang'
+package 'clang-format'
