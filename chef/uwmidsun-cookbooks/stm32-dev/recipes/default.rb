@@ -105,5 +105,22 @@ end
 ###########################
 # clang
 ###########################
-package 'clang'
-package 'clang-format'
+apt_repository 'llvm-5.0' do
+  uri 'http://apt.llvm.org/' + node['lsb']['codename']
+  distribution 'llvm-toolchain-' + node['lsb']['codename'] + '-5.0'
+  components ['main']
+  key 'http://apt.llvm.org/llvm-snapshot.gpg.key'
+  deb_src true
+  action :add
+end
+
+package 'clang-5.0'
+package 'clang-format-5.0'
+
+execute 'update-alternatives clang-5.0' do
+  command 'update-alternatives --install /usr/local/bin/clang clang `which clang-5.0` 10'
+end
+
+execute 'update-alternatives clang-format-5.0' do
+  command 'update-alternatives --install /usr/local/bin/clang-format clang-format `which clang-format-5.0` 10'
+end
