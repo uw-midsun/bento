@@ -8,21 +8,6 @@ Chef::Log.info('Add: Basic packages from xenial repos')
   package p
 end
 
-Chef::Log.info('Add: GCC ARM embedded toolchain from PPA')
-
-apt_repository 'team-gcc-arm-embedded' do
-  uri 'ppa:team-gcc-arm-embedded/ppa'
-  distribution node['lsb']['codename']
-  components ['main']
-  keyserver 'keyserver.ubuntu.com'
-  key 'F64D33B0'
-  deb_src true
-  action :add
-end
-
-Chef::Log.info('Install GCC ARM Embedded')
-package 'gcc-arm-embedded'
-
 Chef::Log.info('Add: rvm from PPA')
 
 apt_repository 'rael-gc' do
