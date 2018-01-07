@@ -110,7 +110,8 @@
               "version": "6.3.1",
               "binary_reported_version": "6.3.1 20170620"
             }]
-          }
+          },
+          "dir": "/opt/gcc-arm-embedded"
         }
       },
       "run_list": ["git", "gcc-arm-embedded", "golang", "tmux", "vim", "stm32-dev"],

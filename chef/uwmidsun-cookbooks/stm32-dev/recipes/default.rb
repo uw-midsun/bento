@@ -50,6 +50,7 @@ ruby_block "insert_line" do
     file.insert_line_if_no_match("/export GOPATH=\/home\/vagrant\/go/", "export GOPATH=/home/vagrant/go")
     file.insert_line_if_no_match("/export GOBIN=$GOPATH\/bin/", "export GOBIN=$GOPATH/bin")
     file.insert_line_if_no_match("/export PATH=$GOPATH\/bin:$PATH/", "export PATH=$GOPATH/bin:$PATH")
+    file.insert_line_if_no_match("/export PATH=\/opt\/gcc-arm-embedded\/gcc-arm-embedded-6.3.1\/bin:$PATH/", "export PATH=/opt/gcc-arm-embedded/gcc-arm-embedded-6.3.1/bin:$PATH")
     file.write_file
   end
 end
@@ -94,7 +95,7 @@ apt_repository 'llvm-5.0' do
   uri 'http://apt.llvm.org/' + node['lsb']['codename']
   distribution 'llvm-toolchain-' + node['lsb']['codename'] + '-5.0'
   components ['main']
-  key 'http://apt.llvm.org/llvm-snapshot.gpg.key'
+  key 'https://apt.llvm.org/llvm-snapshot.gpg.key'
   deb_src true
   action :add
 end
