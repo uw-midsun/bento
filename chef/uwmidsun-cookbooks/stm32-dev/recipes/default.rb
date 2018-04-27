@@ -55,7 +55,7 @@ ruby_block "insert_line" do
   end
 end
 
-package 'glide'
+package 'golang-glide'
 
 
 ###########################
