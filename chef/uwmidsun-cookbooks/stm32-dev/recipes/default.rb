@@ -115,4 +115,6 @@ end
 # Python
 ###########################
 package 'python3-pip'
-package 'pylint3'
+execute 'pylint' do
+  command 'pip3 install pylint'
+end
