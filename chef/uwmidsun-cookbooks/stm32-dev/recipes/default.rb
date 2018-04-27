@@ -110,3 +110,9 @@ end
 execute 'update-alternatives clang-format-5.0' do
   command 'update-alternatives --install /usr/local/bin/clang-format clang-format `which clang-format-5.0` 10'
 end
+
+###########################
+# Python
+###########################
+package 'python3-pip'
+package 'pylint3'
