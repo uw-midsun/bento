@@ -55,7 +55,7 @@ ruby_block "insert_line" do
   end
 end
 
-package 'glide'
+package 'golang-glide'
 
 
 ###########################
@@ -109,4 +109,12 @@ end
 
 execute 'update-alternatives clang-format-5.0' do
   command 'update-alternatives --install /usr/local/bin/clang-format clang-format `which clang-format-5.0` 10'
+end
+
+###########################
+# Python
+###########################
+package 'python3-pip'
+execute 'pylint' do
+  command 'pip3 install pylint'
 end
