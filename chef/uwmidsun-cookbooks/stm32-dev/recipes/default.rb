@@ -2,6 +2,7 @@ Chef::Log.info('Add: Basic packages from xenial repos')
 
 [
   'build-essential',
+  'can-utils',
   'gdb',
   'openocd'
 ].each do |p|
