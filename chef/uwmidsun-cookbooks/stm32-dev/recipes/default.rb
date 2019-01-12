@@ -118,3 +118,6 @@ package 'python3-pip'
 execute 'pylint' do
   command 'pip3 install pylint'
 end
+execute 'cantools' do
+  command 'pip3 install cantools'
+end
