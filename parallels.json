@@ -1,0 +1,141 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<esc><wait>",
+        "<esc><wait>",
+        "<enter><wait>",
+        "/install/vmlinuz<wait>",
+        " auto<wait>",
+        " console-setup/ask_detect=false<wait>",
+        " console-setup/layoutcode=us<wait>",
+        " console-setup/modelcode=pc105<wait>",
+        " debconf/frontend=noninteractive<wait>",
+        " debian-installer=en_US.UTF-8<wait>",
+        " fb=false<wait>",
+        " initrd=/install/initrd.gz<wait>",
+        " kbd-chooser/method=us<wait>",
+        " keyboard-configuration/layout=USA<wait>",
+        " keyboard-configuration/variant=USA<wait>",
+        " locale=en_US.UTF-8<wait>",
+        " netcfg/get_domain=vm<wait>",
+        " netcfg/get_hostname=vagrant<wait>",
+        " grub-installer/bootdev=/dev/sda<wait>",
+        " noapic<wait>",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `preseed_path`}}<wait>",
+        " -- <wait>",
+        "<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "ubuntu",
+      "http_directory": "http",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_url": "{{user `mirror`}}/{{user `mirror_directory`}}/{{user `iso_name`}}",
+      "output_directory": "../builds/packer-{{user `template`}}-parallels",
+      "parallels_tools_flavor": "lin",
+      "prlctl": [
+        [
+          "set",
+          "{{.Name}}",
+          "--memsize",
+          "{{ user `memory` }}"
+        ],
+        [
+          "set",
+          "{{.Name}}",
+          "--ypus",
+          "{{ user `cpus` }}"
+        ]
+      ],
+      "prlctl_version_file": ".prlctl_version",
+      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_username": "vagrant",
+      "ssh_wait_timeout": "10000s",
+      "type": "parallels-iso",
+      "vm_name": "{{ user `template` }}"
+    }
+  ],
+  "post-processors": [
+    {
+      "output": "builds/{{user `box_basename`}}.{{.Provider}}.box",
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "destination": "/tmp/bento-metadata.json",
+      "source": "{{user `metadata`}}",
+      "type": "file"
+    },
+    {
+      "environment_vars": [
+        "HOME_DIR=/home/vagrant",
+        "http_proxy={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}"
+      ],
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "scripts": [
+        "scripts/common/metadata.sh",
+        "scripts/ubuntu/update.sh",
+        "scripts/common/sshd.sh",
+        "scripts/ubuntu/networking.sh",
+        "scripts/ubuntu/sudoers.sh",
+        "scripts/ubuntu/vagrant.sh",
+        "scripts/common/virtualbox.sh",
+        "scripts/ubuntu/cleanup.sh",
+        "scripts/common/minimize.sh"
+      ],
+      "type": "shell"
+    }, {
+      "cookbook_paths": ["chef/cookbooks", "chef/uwmidsun-cookbooks"],
+      "json": {
+        "go": {
+          "version": "1.8.3",
+          "owner": "vagrant",
+          "group": "vagrant"
+        },
+        "gcc_arm": {
+          "linux": {
+            "binary": [{
+              "url": "https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2?revision=2cc92fb5-3e0e-402d-9197-bdfc8224d8a5?product=GNU%20Arm%20Embedded%20Toolchain,64-bit,,Linux,6-2017-q2-update",
+              "sha256_checksum": "e68e4b2fe348ecb567c27985355dff75b65319a0f6595d44a18a8c5e05887cc3",
+              "version": "6.3.1",
+              "binary_reported_version": "6.3.1 20170620"
+            }]
+          },
+          "dir": "/opt/gcc-arm-embedded"
+        }
+      },
+      "run_list": ["git", "gcc-arm-embedded", "golang", "tmux", "vim", "stm32-dev"],
+      "type": "chef-solo",
+      "version": "13.2.20"
+    }
+  ],
+  "variables": {
+    "box_basename": "ubuntu-18.04",
+    "build_timestamp": "{{isotime \"20060102150405\"}}",
+    "cpus": "1",
+    "disk_size": "40960",
+    "git_revision": "__unknown_git_revision__",
+    "headless": "",
+    "http_proxy": "{{env `http_proxy`}}",
+    "https_proxy": "{{env `https_proxy`}}",
+    "iso_checksum": "a7f5c7b0cdd0e9560d78f1e47660e066353bb8a79eb78d1fc3f4ea62a07e6cbc",
+    "iso_checksum_type": "sha256",
+    "iso_name": "ubuntu-18.04-server-amd64.iso",
+    "memory": "1024",
+    "metadata": "metadata.json",
+    "mirror": "http://old-releases.ubuntu.com",
+    "mirror_directory": "releases/18.04.0",
+    "name": "ubuntu-18.04",
+    "no_proxy": "{{env `no_proxy`}}",
+    "preseed_path": "ubuntu-15.10/preseed.cfg",
+    "template": "ubuntu-18.04-amd64",
+    "version": "2.1.TIMESTAMP"
+  }
+}
